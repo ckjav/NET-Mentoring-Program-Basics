@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Logic;
+using System;
 
 namespace HelloWorldConsole
 {
@@ -17,7 +18,7 @@ namespace HelloWorldConsole
                 isValidUsername = AskForUsername();
             } while (!isValidUsername);
 
-            Console.WriteLine($"Hello, {username}!");
+            Console.WriteLine(FormatterMessage.HelloWorld(username));
             Console.WriteLine("Type any key to quit");
             Console.ReadKey();
         }
