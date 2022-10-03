@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldConsole", "HelloWorldConsole\HelloWorldConsole.csproj", "{302D9842-0837-400D-B507-112F4A762A23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloWorldConsole", "HelloWorldConsole\HelloWorldConsole.csproj", "{302D9842-0837-400D-B507-112F4A762A23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{05329CE6-0A40-4096-9B7D-B7F3D6A07752}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic", "Logic\Logic.csproj", "{05329CE6-0A40-4096-9B7D-B7F3D6A07752}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldWpf", "HelloWorldWpf\HelloWorldWpf.csproj", "{313CE13A-CF8D-4D9E-A85D-22FA0A387FAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{05329CE6-0A40-4096-9B7D-B7F3D6A07752}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05329CE6-0A40-4096-9B7D-B7F3D6A07752}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05329CE6-0A40-4096-9B7D-B7F3D6A07752}.Release|Any CPU.Build.0 = Release|Any CPU
+		{313CE13A-CF8D-4D9E-A85D-22FA0A387FAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{313CE13A-CF8D-4D9E-A85D-22FA0A387FAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{313CE13A-CF8D-4D9E-A85D-22FA0A387FAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{313CE13A-CF8D-4D9E-A85D-22FA0A387FAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
