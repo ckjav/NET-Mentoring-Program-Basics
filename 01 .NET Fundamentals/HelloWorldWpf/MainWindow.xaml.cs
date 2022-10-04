@@ -15,15 +15,14 @@ namespace HelloWorldWpf
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            var message = GetMessage();
+            MessageBox.Show(message);
+        }
+
+        private string GetMessage()
+        {
             var username = txtUsername.Text;
-            if (string.IsNullOrEmpty(username))
-            {
-                MessageBox.Show("Not allowed empty username input");
-            }
-            else
-            {
-                MessageBox.Show(FormatterMessage.HelloWorld(username));
-            }
+            return string.IsNullOrEmpty(username) ? "Not allowed empty username input" : FormatterMessage.HelloWorld(username);
         }
     }
 }

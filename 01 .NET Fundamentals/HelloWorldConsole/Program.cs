@@ -10,24 +10,21 @@ namespace HelloWorldConsole
 
         static void Main(string[] args)
         {
-            bool isValidUsername;
-
             do
             {
                 Console.Clear();
-                isValidUsername = AskForUsername();
-            } while (!isValidUsername);
+                AskForUsername();
+            } while (string.IsNullOrEmpty(username));
 
             Console.WriteLine(FormatterMessage.HelloWorld(username));
             Console.WriteLine("Type any key to quit");
             Console.ReadKey();
         }
 
-        static bool AskForUsername()
+        static void AskForUsername()
         {
             Console.WriteLine("Please type your username");
             username = Console.ReadLine();
-            return !string.IsNullOrEmpty(username);
         }
     }
 }
