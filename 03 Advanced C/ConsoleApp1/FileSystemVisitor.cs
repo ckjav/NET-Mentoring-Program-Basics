@@ -6,7 +6,9 @@ internal class FileSystemVisitor
     private readonly bool _hasFilter;
     private bool _executed;
     private List<string> _folders;
+    private IEnumerable<string> _foldersBeforeFilter;
     private List<string> _files = new();
+    private IEnumerable<string> _filesBeforeFilter;
     private readonly Func<IEnumerable<string>, IEnumerable<string>> _filter;
 
     public event EventHandler<FoldersFinderEventArgs> Finder;
@@ -74,7 +76,19 @@ internal class FileSystemVisitor
 
         LookInSubfolder(folders);
 
-        args.Folders = _folders;
+        if (_hasFilter)
+        {
+            _foldersBeforeFilter = _folders.Select(x => x);
+            _filesBeforeFilter = _files.Select(x => x);
+            _folders = _filter(_folders).ToList();
+            _files = _filter(_files).ToList();
+
+            args.HasFilter = true;
+            args.FoldersBeforeFilter.AddRange(_foldersBeforeFilter);
+            args.FilesBeforeFilter.AddRange(_filesBeforeFilter);
+        }
+
+        args.Folders= _folders;
         args.Files = _files;
         args.End = DateTime.Now;
 
