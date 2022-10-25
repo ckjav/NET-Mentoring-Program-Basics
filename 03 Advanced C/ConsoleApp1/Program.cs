@@ -10,31 +10,50 @@ do
 } while (string.IsNullOrEmpty(path));
 
 var fileSystemVisitor = new FileSystemVisitor(path);
+fileSystemVisitor.Finder += c_FolderFinderFinished;
 
-Console.WriteLine("Path contains the next folders: ");
-foreach (var folder in fileSystemVisitor.GetFolders())
+Console.WriteLine("Would you see folder list, type y/s: ");
+var response = Console.ReadKey();
+Console.WriteLine("");
+var folders = fileSystemVisitor.GetFolders();
+var files = fileSystemVisitor.GetFiles();
+
+if (response.KeyChar.Equals('y'))
 {
-    Console.WriteLine(folder);
-}
-Console.WriteLine("Path contains the next files: ");
-foreach (var file in fileSystemVisitor.GetFiles())
-{
-    Console.WriteLine(file);
+    foreach (var _ in folders)
+    {
+        Console.WriteLine(_);
+    }
+    foreach (var _ in files)
+    {
+        Console.WriteLine(_);
+    }
 }
 
-var fileSystemVisitorWithCarrot = new FileSystemVisitor(path, OnlyElementsWithCarrot);
-Console.WriteLine("Path contains the next folders that contains 'carrot': ");
-foreach (var folder in fileSystemVisitorWithCarrot.GetFolders())
-{
-    Console.WriteLine(folder);
-}
-Console.WriteLine("Path contains the next files that contains 'carrot': ");
-foreach (var file in fileSystemVisitorWithCarrot.GetFiles())
-{
-    Console.WriteLine(file);
-}
+//var fileSystemVisitorWithCarrot = new FileSystemVisitor(path, OnlyElementsWithCarrot);
+//Console.WriteLine("Path contains the next folders that contains 'carrot': ");
+//foreach (var folder in fileSystemVisitorWithCarrot.GetFolders())
+//{
+//    Console.WriteLine(folder);
+//}
 
 IEnumerable<string> OnlyElementsWithCarrot(IEnumerable<string> files)
 {
     return files.Where(f => f.Contains("carrot", StringComparison.InvariantCultureIgnoreCase));
+}
+
+static void c_FolderFinderFinished(object sender, FoldersFinderEventArgs e)
+{
+    Console.WriteLine("Started at {0} and finished at {1}", e.Start, e.End);
+    Console.WriteLine("Contains {0} folders and {1} files", e.Folders.Count, e.Files.Count);
+    if(e.HasFilter) Console.WriteLine("After filtering, there are {0} folders and {1} files", e.Folders.Count, e.Files.Count);
+}
+
+public class FoldersFinderEventArgs : EventArgs
+{
+    public bool HasFilter { get; set; }
+    public DateTime Start { get; set; }
+    public DateTime End { get; set; }
+    public List<string> Folders = new();
+    public List<string> Files = new();
 }
