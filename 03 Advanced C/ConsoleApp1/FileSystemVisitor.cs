@@ -1,55 +1,22 @@
-﻿namespace ConsoleApp1;
+﻿using System.Collections;
 
-internal class FileSystemVisitor
+namespace FileSystemVisitor;
+
+public class FileSystemVisitor : IteratorFileSystem
 {
-    private readonly string _path;
-    private readonly bool _hasFilter;
-    private bool _executed;
-    private List<string> _folders;
-    private IEnumerable<string> _foldersBeforeFilter;
-    private List<string> _files = new();
-    private IEnumerable<string> _filesBeforeFilter;
-    private readonly Func<IEnumerable<string>, IEnumerable<string>> _filter;
+    private readonly List<DirectoryElement> _directoryElements = new List<DirectoryElement>();
 
     public event EventHandler<FoldersFinderEventArgs> Finder;
 
 
     public FileSystemVisitor(string path)
     {
-        _executed = false;
-        _path = path;
-        _folders = new List<string>();
-        _files = new List<string>();
+        _directoryElements = InspectFolderContent(path, 1);
     }
 
-    public FileSystemVisitor(string path, Func<IEnumerable<string>, IEnumerable<string>> filterFunc) : this(path)
+    public FileSystemVisitor(string path, Func<IEnumerable<DirectoryElement>, IEnumerable<DirectoryElement>> filterFunc) : this(path)
     {
-        _filter = filterFunc;
-        _hasFilter = true;
-    }
-
-    public IEnumerable<string> GetFolders()
-    {
-        GetFolderContent();
-
-        int index = 0;
-        while (index < _folders.Count)
-        {
-            yield return _folders[index];
-            index++;
-        }
-    }
-
-    public IEnumerable<string> GetFiles()
-    {
-        GetFolderContent();
-
-        int index = 0;
-        while (index < _files.Count)
-        {
-            yield return _files[index];
-            index++;
-        }
+        _directoryElements = filterFunc(_directoryElements).ToList();
     }
 
     protected virtual void OnFolderFinderFinished(FoldersFinderEventArgs e)
@@ -61,50 +28,45 @@ internal class FileSystemVisitor
         }
     }
 
-    private void GetFolderContent()
+    private List<DirectoryElement> InspectFolderContent(string _path, int depthLevel = 1)
     {
-        if (_executed) return;
 
-        _executed = true;
-        FoldersFinderEventArgs args = new FoldersFinderEventArgs();
-        args.Start = DateTime.Now;
-
-        var folders = Directory.GetDirectories(_path).ToList();
-        var files = Directory.GetFiles(_path).ToList();
-        _folders.AddRange(folders);
-        _files.AddRange(files);
-
-        LookInSubfolder(folders);
-
-        if (_hasFilter)
+        var files = Directory.GetFiles(_path);
+        if (files.Any())
         {
-            _foldersBeforeFilter = _folders.Select(x => x);
-            _filesBeforeFilter = _files.Select(x => x);
-            _folders = _filter(_folders).ToList();
-            _files = _filter(_files).ToList();
-
-            args.HasFilter = true;
-            args.FoldersBeforeFilter.AddRange(_foldersBeforeFilter);
-            args.FilesBeforeFilter.AddRange(_filesBeforeFilter);
+            foreach (var file in files)
+            {
+                _directoryElements.Add(new DirectoryElement
+                {
+                    ElementType = DirectoryElementType.File,
+                    Name = file.Replace(_path + "\\", string.Empty),
+                    DepthLevel = depthLevel
+                });
+            }
         }
 
-        args.Folders= _folders;
-        args.Files = _files;
-        args.End = DateTime.Now;
-
-        OnFolderFinderFinished(args);
-    }
-
-    private void LookInSubfolder(IEnumerable<string> folders)
-    {
-        foreach (var _ in folders)
+        var folders = Directory.GetDirectories(_path);
+        if (folders.Any())
         {
-            var subFolders = Directory.GetDirectories(_);
-            var subfolderFiles = Directory.GetFiles(_).ToList();
-            _folders.AddRange(subFolders);
-            _files.AddRange(subfolderFiles);
-
-            LookInSubfolder(subFolders);
+            foreach (var folder in folders)
+            {
+                _directoryElements.Add(new DirectoryElement
+                {
+                    ElementType = DirectoryElementType.Directory,
+                    Name = folder.Replace(_path + "\\", string.Empty),
+                    DepthLevel = depthLevel
+                });
+                InspectFolderContent(folder, depthLevel + 1);
+            }
         }
+
+        return _directoryElements;
     }
+
+    public override IEnumerator GetEnumerator()
+    {
+        return new FileSystemIterator(_directoryElements);
+    }
+
+
 }

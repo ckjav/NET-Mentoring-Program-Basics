@@ -1,65 +1,49 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using ConsoleApp1;
 
-var path = string.Empty;
+namespace FileSystemVisitor;
 
-do
+public static class Program
 {
-    Console.WriteLine("Please type the path that you want to evaluate its folders and files");
-    path = Console.ReadLine();
-} while (string.IsNullOrEmpty(path));
-
-//var fileSystemVisitor = new FileSystemVisitor(path);
-//fileSystemVisitor.Finder += c_FolderFinderFinished;
-//PrintResult(fileSystemVisitor);
-
-
-var fileSystemVisitorWithCarrot = new FileSystemVisitor(path, OnlyElementsWithCarrot);
-fileSystemVisitorWithCarrot.Finder += c_FolderFinderFinished;
-PrintResult(fileSystemVisitorWithCarrot, "Path contains the next folders that contains 'carrot': ");
-
-
-void PrintResult(FileSystemVisitor fsv, string filter = "")
-{
-    Console.WriteLine("Would you see folder list, type y/s: ");
-    var response = Console.ReadKey();
-    Console.WriteLine("");
-    var folders = fsv.GetFolders();
-    var files = fsv.GetFiles();
-
-    if (response.KeyChar.Equals('y'))
+    private static void Main(string[] args)
     {
-        if (!string.IsNullOrEmpty(filter))
+        var path = string.Empty;
+
+        var currentDirectory = Directory.GetCurrentDirectory();
+
+        Console.WriteLine($"Please type the path that you want to evaluate its folders and files or press 'Enter' to evaluate current directory: {currentDirectory}.");
+        path = Console.ReadLine();
+
+        if (string.IsNullOrEmpty(path) || !Directory.Exists(path))
         {
-            Console.WriteLine(filter);
+            path = currentDirectory;
         }
 
-        foreach (var _ in folders)
+        Console.WriteLine("Type any string to filter directory content by that term, type 'Enter' to skip this filter.");
+        var lookByTerm = Console.ReadLine();
+
+        FileSystemVisitor fsv;
+        if (string.IsNullOrEmpty(lookByTerm))
         {
-            Console.WriteLine(_);
+        fsv = new FileSystemVisitor(path);
         }
-        foreach (var _ in files)
+        else
         {
-            Console.WriteLine(_);
+            fsv = new FileSystemVisitor(path, OnlyElementsWithString);
+        }
+
+        Console.WriteLine(path);
+        foreach (DirectoryElement element in fsv)
+        {
+            Console.Write("|");
+            for (int depth = 1; depth <= element.DepthLevel; ++depth) Console.Write("-");
+            Console.WriteLine($" {element.Name} is a {(element.ElementType == DirectoryElementType.Directory ? "Directory" : "File")}");
+        }
+
+        IEnumerable<DirectoryElement> OnlyElementsWithString(IEnumerable<DirectoryElement> contentFolder)
+        {
+            return contentFolder.Where(f => f.Name.Contains(lookByTerm, StringComparison.InvariantCultureIgnoreCase));
         }
     }
-    else
-    {
-        Console.WriteLine("There are {0} folders and {1} files.", folders.Count(), files.Count());
-    }
-}
-
-
-IEnumerable<string> OnlyElementsWithCarrot(IEnumerable<string> files)
-{
-    return files.Where(f => f.Contains("carrot", StringComparison.InvariantCultureIgnoreCase));
-}
-
-static void c_FolderFinderFinished(object sender, FoldersFinderEventArgs e)
-{
-    Console.WriteLine("Started at {0} and finished at {1}", e.Start, e.End);
-    Console.WriteLine("Contains {0} folders and {1} files", e.Folders.Count, e.Files.Count);
-    if(e.HasFilter) Console.WriteLine("Before filtering, there are {0} folders and {1} files", e.FoldersBeforeFilter.Count, e.FilesBeforeFilter.Count);
 }
 
 public class FoldersFinderEventArgs : EventArgs
