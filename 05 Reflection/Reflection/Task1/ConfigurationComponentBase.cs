@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Task1.Contracts;
 
 namespace Task1;
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Task1;
+namespace Task1.Contracts;
 
 public interface IConfigurationComponentBase
 {
