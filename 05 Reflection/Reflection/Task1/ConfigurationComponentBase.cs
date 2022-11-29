@@ -1,20 +1,20 @@
-﻿using Microsoft.Extensions.Configuration;
-using Task1.Contracts;
+﻿using System.Text.Json.Serialization;
+using System.Xml.Serialization;
 
 namespace Task1;
 
-public class ConfigurationComponentBase : IConfigurationComponentBase
+public class ConfigurationComponentBase// : IConfigurationComponentBase
 {
-    [ConfigurationItem("some")]
-    public bool StringProperty { get; set; }
+    [ConfigurationItem("assemblies")]
+    [JsonPropertyName("assemblies")]
+    [XmlAttribute(AttributeName = "name")]
+    public IEnumerable<ConfigurationComponentElement> Assemblies { get; set; }
+}
 
-    public void LoadSettings(IConfigurationProvider configurationProvider)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void SaveSettings()
-    {
-        throw new NotImplementedException();
-    }
+public class ConfigurationComponentElement
+{
+    [ConfigurationItem("nameCustom")]
+    [JsonPropertyName("nameJson")]
+    [XmlAttribute(AttributeName = "nameXml")]
+    public string Name { get; set; }
 }

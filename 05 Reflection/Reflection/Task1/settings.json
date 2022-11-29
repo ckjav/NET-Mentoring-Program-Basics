@@ -1,0 +1,8 @@
+{
+  "assemblies": [
+    {
+      "nameJson": "newtonsoft.dll",
+      "load": true
+    }
+  ]
+}
