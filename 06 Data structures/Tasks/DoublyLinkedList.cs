@@ -9,6 +9,7 @@ namespace Tasks
     {
         private int _index = -1;
         private Node<T> _head;
+        private Node<T> _tail;
 
         public int Length => _index + 1;
 
@@ -119,7 +120,14 @@ namespace Tasks
             }
 
             --_index;
-            previous.Next = current.Next;
+            if (previous == null)
+            {
+                _head = current.Next;
+            }
+            else
+            {
+                previous.Next = current.Next;
+            }
 
             return current.Data;
         }
@@ -146,6 +154,8 @@ namespace Tasks
         public T Data { get; set; }
 
         public Node<T> Next { get; set; }
+
+        public Node<T> Previous { get; set; }
 
         public Node(T data)
         {
