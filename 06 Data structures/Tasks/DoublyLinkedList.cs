@@ -7,11 +7,10 @@ namespace Tasks
 {
     public class DoublyLinkedList<T> : IDoublyLinkedList<T>
     {
-        private int _index = -1;
+        private int _length = -1;
         private Node<T> _head;
-        private Node<T> _tail;
 
-        public int Length => _index + 1;
+        public int Length => _length + 1;
 
         public void Add(T e)
         {
@@ -23,22 +22,22 @@ namespace Tasks
             {
                 var current = _head;
                 
-                for (var i = 0; i < _index; ++i)
+                for (var i = 0; i < _length; i++)
                 {
                     current = _head.Next;
                 }
 
                 current.Next = new Node<T>(e);
             }
-            ++_index;
+            _length++;
         }
 
         public void AddAt(int index, T e)
         {
-            if (index < 0 || index > _index + 1) throw new IndexOutOfRangeException();
+            if (index < 0 || index > _length + 1) throw new IndexOutOfRangeException();
 
             var current = _head;
-            for (var i = 0; i < index - 1; ++i)
+            for (var i = 0; i < index - 1; i++)
             {
                 current = current.Next;
             }
@@ -52,7 +51,7 @@ namespace Tasks
                 _head = temp;
             }
 
-            ++_index;
+            _length++;
         }
 
         public T ElementAt(int index)
@@ -60,7 +59,7 @@ namespace Tasks
             ValidateIndexForRemoval(index);
 
             Node<T> current = _head;
-            for (var i = 0; i < index; ++i)
+            for (var i = 0; i < index; i++)
             {
                 current = current.Next;
             }
@@ -98,7 +97,7 @@ namespace Tasks
                     previous.Next = current.Next;
 
                     }
-                    --_index;
+                    _length--;
                     return;
                 }
 
@@ -113,13 +112,13 @@ namespace Tasks
 
             var current = _head;
             var previous = (Node<T>)null;
-            for (var i = 0; i < index; ++i)
+            for (var i = 0; i < index; i++)
             {
                 previous = current;
                 current = current.Next;
             }
 
-            --_index;
+            _length--;
             if (previous == null)
             {
                 _head = current.Next;
@@ -145,7 +144,7 @@ namespace Tasks
         private void ValidateIndexForRemoval(int index)
         {
             ValidateIndexForRemoval();
-            if (index < 0 || index > _index) throw new IndexOutOfRangeException();
+            if (index < 0 || index > _length) throw new IndexOutOfRangeException();
         }
     }
 
