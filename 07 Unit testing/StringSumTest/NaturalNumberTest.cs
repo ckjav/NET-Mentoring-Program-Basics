@@ -12,7 +12,7 @@ public class NaturalNumberTest
     }
 
     [Fact]
-    public void IsANumber_WhenReceivesEmptyString_ShouldReturnZero()
+    public void Parse_WhenReceivesEmptyString_ShouldReturnZero()
     {
         var input = "";
 
@@ -22,7 +22,7 @@ public class NaturalNumberTest
     }
 
     [Fact]
-    public void IsANumber_WhenReceivesStringAndNumber_ShouldReturnZero()
+    public void Parse_WhenReceivesStringAndNumber_ShouldReturnZero()
     {
         var input = "a1";
 
@@ -32,7 +32,7 @@ public class NaturalNumberTest
     }
 
     [Fact]
-    public void IsANumber_WhenReceivesNegativeNumber_ShouldReturnZero()
+    public void Parse_WhenReceivesNegativeNumber_ShouldReturnZero()
     {
         var input = "-1";
 
@@ -42,7 +42,7 @@ public class NaturalNumberTest
     }
 
     [Fact]
-    public void IsANumber_WhenReceivesNumberWithDecimals_ShouldReturnZero()
+    public void Parse_WhenReceivesNumberWithDecimals_ShouldReturnZero()
     {
         var input = "11.32";
 
