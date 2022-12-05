@@ -30,4 +30,14 @@ public class NaturalNumberTest
 
         Assert.Equal(0, response);
     }
+
+    [Fact]
+    public void IsANumber_WhenReceivesNegativeNumber_ShouldReturnZero()
+    {
+        var input = "-1";
+
+        var response = _naturalNumberSUT.Parse(input);
+
+        Assert.Equal(0, response);
+    }
 }
