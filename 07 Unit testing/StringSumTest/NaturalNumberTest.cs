@@ -18,7 +18,7 @@ public class NaturalNumberTest
 
         var response = _naturalNumberSUT.Parse(input);
 
-        Assert.Equal(0, response);
+        Assert.Equal(0L, response);
     }
 
     [Fact]
@@ -28,7 +28,7 @@ public class NaturalNumberTest
 
         var response = _naturalNumberSUT.Parse(input);
 
-        Assert.Equal(0, response);
+        Assert.Equal(0L, response);
     }
 
     [Fact]
@@ -38,6 +38,16 @@ public class NaturalNumberTest
 
         var response = _naturalNumberSUT.Parse(input);
 
-        Assert.Equal(0, response);
+        Assert.Equal(0L, response);
+    }
+
+    [Fact]
+    public void IsANumber_WhenReceivesNumberWithDecimals_ShouldReturnZero()
+    {
+        var input = "11.32";
+
+        var response = _naturalNumberSUT.Parse(input);
+
+        Assert.Equal(0L, response);
     }
 }

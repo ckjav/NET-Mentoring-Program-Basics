@@ -2,5 +2,5 @@
 
 public interface INaturalNumber
 {
-    int Parse(string input);
+    long Parse(string input);
 }
