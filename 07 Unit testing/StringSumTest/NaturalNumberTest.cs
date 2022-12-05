@@ -20,4 +20,14 @@ public class NaturalNumberTest
 
         Assert.Equal(0, response);
     }
+
+    [Fact]
+    public void IsANumber_WhenReceivesStringAndNumber_ShouldReturnZero()
+    {
+        var input = "a1";
+
+        var response = _naturalNumberSUT.Parse(input);
+
+        Assert.Equal(0, response);
+    }
 }
