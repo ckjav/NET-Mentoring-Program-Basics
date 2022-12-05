@@ -12,7 +12,7 @@ public class NaturalNumberTest
     }
 
     [Fact]
-    public void IsANumber_WhenReceivesEmptyString()
+    public void IsANumber_WhenReceivesEmptyString_ShouldReturnZero()
     {
         var input = "";
 

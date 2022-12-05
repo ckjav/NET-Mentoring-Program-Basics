@@ -1,11 +1,11 @@
-﻿using System.Text.RegularExpressions;
-
-namespace StringSum;
+﻿namespace StringSum;
 
 public class NaturalNumber : INaturalNumber
 {
     public int Parse(string input)
     {
-        return 0;
+        if (string.IsNullOrEmpty(input)) return 0;
+
+        return int.Parse(input);
     }
 }
