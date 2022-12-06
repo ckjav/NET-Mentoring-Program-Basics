@@ -1,4 +1,5 @@
 ﻿using PrimeFactor;
+using FluentAssertions;
 using Xunit;
 
 namespace UnitTestingTest;
@@ -26,13 +27,24 @@ public class PrimeFactorTest
 
     [Theory]
     [InlineData(2, 1)]
-    [InlineData(5, 3)]
-    [InlineData(10, 5)]
-    [InlineData(21, 11)]
-    public void GetHigherValueToCompare_Scenarios(int input, int valueToCompare)
+    [InlineData(3, 2)]
+    [InlineData(7, 2)]
+    public void IncreaseFactor_Scenarios(int input, int valueToCompare)
     {
-        var response = _primeFactorSUT.GetHigherValueToCompare(input);
+        var response = _primeFactorSUT.IncreaseFactor(input);
 
         Assert.Equal(valueToCompare, response);
+    }
+
+    [Theory]
+    [InlineData(2, new[] { 2 })]
+    [InlineData(10, new[] { 2, 3, 5, 7 })]
+    [InlineData(30, new[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 })]
+    [InlineData(100, new[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97 })]
+    public void GetPrimeValues(int input, IEnumerable<int> primeFactorValues)
+    {
+        var response = _primeFactorSUT.GetPrimeValues(input);
+
+        response.Should().BeEquivalentTo(primeFactorValues);
     }
 }
