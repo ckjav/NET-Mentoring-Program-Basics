@@ -5,7 +5,9 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StringSum", "StringSum\StringSum.csproj", "{C32CEA18-D06C-4C69-8EE2-F5DB86A6FE71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringSumTest", "StringSumTest\StringSumTest.csproj", "{98A0C6B2-C839-4586-8038-1193C2929DC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestingTest", "StringSumTest\UnitTestingTest.csproj", "{98A0C6B2-C839-4586-8038-1193C2929DC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeFactor", "PrimeFactor\PrimeFactor.csproj", "{EE0EE714-D6F1-4D33-89E5-E69CBAE27722}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{98A0C6B2-C839-4586-8038-1193C2929DC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98A0C6B2-C839-4586-8038-1193C2929DC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98A0C6B2-C839-4586-8038-1193C2929DC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE0EE714-D6F1-4D33-89E5-E69CBAE27722}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE0EE714-D6F1-4D33-89E5-E69CBAE27722}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE0EE714-D6F1-4D33-89E5-E69CBAE27722}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE0EE714-D6F1-4D33-89E5-E69CBAE27722}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
