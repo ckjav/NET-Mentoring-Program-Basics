@@ -40,14 +40,25 @@ public class PrimeFactorGenerator : IPrimeFactorGenerator
     {
         if (!IsValidRange(input)) throw new ArgumentOutOfRangeException("Start value must be greater or equal than 2 and less or equal than 100.");
 
-        for (var i = 2; i <= input;)
+        Console.WriteLine($"1");
+
+        for (var i = 2; i <= input; ++i)
         {
             if (IsPrimeNumber(i))
             {
                 Primes.Add(i);
+                Console.WriteLine("prime");
+                continue;
+            }
+            if (i % 2 != 0)
+            {
+                Console.WriteLine("composite");
+            }
+            else
+            {
+                Console.WriteLine($"{i}");
             }
 
-            i += IncreaseFactor(i);
         }
 
         return Primes;
