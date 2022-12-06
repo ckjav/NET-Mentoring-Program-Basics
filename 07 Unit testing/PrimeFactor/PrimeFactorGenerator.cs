@@ -14,15 +14,6 @@ public class PrimeFactorGenerator : IPrimeFactorGenerator
         return input > 0 && input <= 100;
     }
 
-    public int IncreaseFactor(int input)
-    {
-        switch (input)
-        {
-            case 2: return 1;
-            default: return 2;
-        }
-    }
-
     private bool IsPrimeNumber(int input)
     {
         foreach (var prime in Primes)

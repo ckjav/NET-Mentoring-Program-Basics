@@ -26,17 +26,6 @@ public class PrimeFactorTest
     }
 
     [Theory]
-    [InlineData(2, 1)]
-    [InlineData(3, 2)]
-    [InlineData(7, 2)]
-    public void IncreaseFactor_Scenarios(int input, int valueToCompare)
-    {
-        var response = _primeFactorSUT.IncreaseFactor(input);
-
-        Assert.Equal(valueToCompare, response);
-    }
-
-    [Theory]
     [InlineData(2, new[] { 2 })]
     [InlineData(10, new[] { 2, 3, 5, 7 })]
     [InlineData(30, new[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 })]
