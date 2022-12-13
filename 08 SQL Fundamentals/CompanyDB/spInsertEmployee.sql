@@ -10,9 +10,19 @@
 	@zipCode NVARCHAR(50) = NULL
 AS
 
-	IF @firstName = NULL OR TRIM(@firstName) = ''
+	IF (@employeeName = NULL OR TRIM(@employeeName) = '')
 	BEGIN
-		PRINT 'First name must not be an empty string.'
+		PRINT 'Employee name must not be null nor an empty string.'
+		RETURN
+	END
+	IF (@firstName = NULL OR TRIM(@firstName) = '')
+	BEGIN
+		PRINT 'First name must not be null nor an empty string.'
+		RETURN
+	END
+	IF (@lastName = NULL OR TRIM(@lastName) = '')
+	BEGIN
+		PRINT 'Last name must not be an empty string.'
 		RETURN
 	END
 
