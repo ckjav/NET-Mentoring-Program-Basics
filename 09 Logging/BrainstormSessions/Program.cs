@@ -17,9 +17,6 @@ namespace BrainstormSessions
                     .ReadFrom.Configuration(context.Configuration)
                     .ReadFrom.Services(services)
                     .Enrich.FromLogContext()
-                    .MinimumLevel.Override("Microsoft.AspNetCore", Serilog.Events.LogEventLevel.Debug)
-                    .WriteTo.Console()
-                    .WriteTo.File("Log\\brainstorm_log.log", rollingInterval: RollingInterval.Month)
                 )
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
