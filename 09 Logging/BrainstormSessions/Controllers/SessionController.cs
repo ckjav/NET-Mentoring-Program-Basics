@@ -2,16 +2,16 @@
 using BrainstormSessions.Core.Interfaces;
 using BrainstormSessions.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace BrainstormSessions.Controllers
 {
     public class SessionController : Controller
     {
         private readonly IBrainstormSessionRepository _sessionRepository;
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger _logger;
 
-        public SessionController(IBrainstormSessionRepository sessionRepository, ILogger<HomeController> logger)
+        public SessionController(IBrainstormSessionRepository sessionRepository, ILogger logger)
         {
             _sessionRepository = sessionRepository;
             _logger = logger;
@@ -21,6 +21,7 @@ namespace BrainstormSessions.Controllers
         {
             if (!id.HasValue)
             {
+                _logger.Error("Id has no value");
                 return RedirectToAction(actionName: nameof(Index),
                     controllerName: "Home");
             }
@@ -28,6 +29,7 @@ namespace BrainstormSessions.Controllers
             var session = await _sessionRepository.GetByIdAsync(id.Value);
             if (session == null)
             {
+                _logger.Error("Not valid session");
                 return Content("Session not found.");
             }
 
@@ -37,6 +39,7 @@ namespace BrainstormSessions.Controllers
                 Name = session.Name,
                 Id = session.Id
             };
+            _logger.Information($"Get {nameof(StormSessionViewModel)}");
 
             return View(viewModel);
         }
