@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinarySerializerConsole", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlSerializerConsole", "XmlSerializerConsole\XmlSerializerConsole.csproj", "{C26AEF83-3FAC-4C24-B960-C3C9BAF2790E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseLibrary", "BaseLibrary\BaseLibrary.csproj", "{C1D6E8CE-26E0-4A10-A638-E23A6FA20F8B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C26AEF83-3FAC-4C24-B960-C3C9BAF2790E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C26AEF83-3FAC-4C24-B960-C3C9BAF2790E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C26AEF83-3FAC-4C24-B960-C3C9BAF2790E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1D6E8CE-26E0-4A10-A638-E23A6FA20F8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1D6E8CE-26E0-4A10-A638-E23A6FA20F8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1D6E8CE-26E0-4A10-A638-E23A6FA20F8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1D6E8CE-26E0-4A10-A638-E23A6FA20F8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
