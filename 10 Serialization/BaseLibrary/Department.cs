@@ -1,5 +1,6 @@
 ﻿namespace BaseLibrary;
 
+[Serializable]
 public class Department
 {
     public string DepartmentName { get; set; }
