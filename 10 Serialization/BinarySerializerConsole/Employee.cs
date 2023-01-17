@@ -3,5 +3,5 @@
 [Serializable]
 public class Employee
 {
-    public string EmpoyeeName { get; set; }
+    public string EmployeeName { get; set; }
 }

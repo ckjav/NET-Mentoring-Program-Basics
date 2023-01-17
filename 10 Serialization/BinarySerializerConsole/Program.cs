@@ -39,12 +39,12 @@ public static class Program
 
         var objEmployeeA = new Employee
         {
-            EmpoyeeName = "First employee"
+            EmployeeName = "First employee"
         };
 
         var objEmployeeZ = new Employee
         {
-            EmpoyeeName = "Last employee"
+            EmployeeName = "Last employee"
         };
 
         department.Employees = new List<Employee>
@@ -116,7 +116,7 @@ public static class Program
             foreach (var employee in department.Employees)
             {
                 Console.WriteLine($"Employee {counter}:");
-                Console.WriteLine($"Employee name: {employee.EmpoyeeName}");
+                Console.WriteLine($"Employee name: {employee.EmployeeName}");
             }
         }
 
