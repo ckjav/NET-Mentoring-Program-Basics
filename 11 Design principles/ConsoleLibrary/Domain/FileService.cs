@@ -55,6 +55,7 @@ internal class FileService : BaseStorageService
                 "book" => JsonSerializer.Deserialize<Book>(ref reader)!,
                 "localizedBook" => JsonSerializer.Deserialize<LocalizedBook>(ref reader)!,
                 "patent" => JsonSerializer.Deserialize<Patent>(ref reader)!,
+                "magazine" => JsonSerializer.Deserialize<Magazine>(ref reader)!,
                 _ => throw new JsonException()
             };
 
