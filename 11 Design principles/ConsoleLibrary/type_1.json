@@ -1,0 +1,9 @@
+{
+  "type": "book",
+  "Title": "Macbeth",
+  "ISBN": "9780936388879",
+  "Authors": "William Shakespeare",
+  "NumberOfPages": 900,
+  "Publisher": "Oxford",
+  "DatePublished": "2000-01-01"
+}

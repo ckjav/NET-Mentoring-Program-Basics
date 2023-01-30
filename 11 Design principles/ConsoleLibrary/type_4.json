@@ -1,0 +1,11 @@
+{
+  "type": "localizedBook",
+  "Title": "El Quijote de la mancha",
+  "ISBN": "9780936388878",
+  "Authors": "Miguel de Cervantes de Saavedra",
+  "NumberOfPages": 800,
+  "OriginalPublisher": "Vintage Espanol",
+  "DatePublished": "2010-01-01",
+  "CountryOfLocalization": "England",
+  "LocalPublisher": "Carnegie Mellon"
+}
